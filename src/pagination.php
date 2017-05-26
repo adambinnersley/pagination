@@ -3,7 +3,7 @@
 /**
  * Description of Pagination
  *
- * @author Adam BInnersley <abinnersley@gmail.com>
+ * @author Adam Binnersley <abinnersley@gmail.com>
  */
 class Pagination{
     
