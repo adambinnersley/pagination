@@ -1,6 +1,6 @@
 {
     "name": "adamb/pagination",
-    "version": "v1.0.0",
+    "version": "v1.0.1",
     "description": "Creates bootstrap themed pagination buttons",
     "type": "library",
     "require-dev": {
