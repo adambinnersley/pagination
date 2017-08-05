@@ -5,6 +5,8 @@
  *
  * @author Adam Binnersley <abinnersley@gmail.com>
  */
+namespace Pager;
+
 class Pagination{
     
     public static $current;
