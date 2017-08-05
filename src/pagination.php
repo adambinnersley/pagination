@@ -44,8 +44,9 @@ class Pagination{
                 if(self::$current != (self::$lastpage - 1)){$paging.= '<li><a href="'.$pageURL.'?'.$additional.'page='.ceil($records / $maxshown).'">&raquo;</a></li>';}
             }
             $paging.= '</ul>';
+            return $paging;
         }
-        return $paging;
+        return false;
     }
     
     /**
