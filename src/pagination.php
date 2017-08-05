@@ -1,10 +1,4 @@
 <?php
-
-/**
- * Description of Pagination
- *
- * @author Adam Binnersley <abinnersley@gmail.com>
- */
 namespace Pager;
 
 class Pagination{
