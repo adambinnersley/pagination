@@ -17,7 +17,7 @@ class Pagination {
      * @return string Returns the pagination menu
      */
     public static function paging($records, $pageURL, $start = 0, $additional = '', $maxshown = 50, $numpagesshown = 11) {
-        if($records > $maxshown){
+        if ($records > $maxshown) {
             if ($start >= 1) {self::$current = $start;} else {self::$current = 1;}
             self::$lastpage = ceil($records / $maxshown);
             
@@ -34,7 +34,7 @@ class Pagination {
                 $paging.= '<li'.$curselect.'><a href="'.$pageURL.'?'.$additional.'page='.self::$page.'">'.self::$page.'</a></li>';
                 self::$page = (self::$page + 1);
             }
-            if(self::$current != self::$lastpage){
+            if (self::$current != self::$lastpage) {
                 $paging.= '<li><a href="'.$pageURL.'?'.$additional.'page='.($start + 1).'">&gt;</a></li>';
                 if (self::$current != (self::$lastpage - 1)) {$paging.= '<li><a href="'.$pageURL.'?'.$additional.'page='.ceil($records / $maxshown).'">&raquo;</a></li>';}
             }
