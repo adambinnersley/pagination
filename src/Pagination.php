@@ -18,7 +18,7 @@ class Pagination {
      */
     public static function paging($records, $pageURL, $start = 0, $additional = '', $maxshown = 50, $numpagesshown = 11) {
         if ($records > $maxshown) {
-            if ($start >= 1) { self::$current = $start; } else { self::$current = 1; }
+            if ($start >= 1) { self::$current = $start; }else { self::$current = 1; }
             self::$lastpage = ceil($records / $maxshown);
             
             if (!empty($additional)) { $additional = 'search='.$additional.'&amp;'; }
@@ -26,19 +26,19 @@ class Pagination {
             self::getPage($records, $maxshown, $numpagesshown);
             $paging = '<ul class="pagination">';
             if (self::$current != 1) {
-                if (self::$current != 2) { $paging.= '<li><a href="'.$pageURL.'?'.$additional.'">&laquo;</a></li>'; }
-                $paging.= '<li><a href="'.$pageURL.'?'.$additional.'page='.($start - 1).'">&lt;</a></li>';
+                if (self::$current != 2) { $paging .= '<li><a href="'.$pageURL.'?'.$additional.'">&laquo;</a></li>'; }
+                $paging .= '<li><a href="'.$pageURL.'?'.$additional.'page='.($start - 1).'">&lt;</a></li>';
             }
             while (self::$page <= self::$lastpage) {
-                if (self::$current == self::$page) { $curselect = ' class="active"'; } else { $curselect = ''; }
-                $paging.= '<li'.$curselect.'><a href="'.$pageURL.'?'.$additional.'page='.self::$page.'">'.self::$page.'</a></li>';
+                if (self::$current == self::$page) { $curselect = ' class="active"'; }else { $curselect = ''; }
+                $paging .= '<li'.$curselect.'><a href="'.$pageURL.'?'.$additional.'page='.self::$page.'">'.self::$page.'</a></li>';
                 self::$page = (self::$page + 1);
             }
             if (self::$current != self::$lastpage) {
-                $paging.= '<li><a href="'.$pageURL.'?'.$additional.'page='.($start + 1).'">&gt;</a></li>';
-                if (self::$current != (self::$lastpage - 1)) { $paging.= '<li><a href="'.$pageURL.'?'.$additional.'page='.ceil($records / $maxshown).'">&raquo;</a></li>'; }
+                $paging .= '<li><a href="'.$pageURL.'?'.$additional.'page='.($start + 1).'">&gt;</a></li>';
+                if (self::$current != (self::$lastpage - 1)) { $paging .= '<li><a href="'.$pageURL.'?'.$additional.'page='.ceil($records / $maxshown).'">&raquo;</a></li>'; }
             }
-            $paging.= '</ul>';
+            $paging .= '</ul>';
             return $paging;
         }
         return false;
@@ -54,12 +54,12 @@ class Pagination {
     protected static function getPage($records, $maxshown, $numpages) {
         $show = floor($numpages / 2);
         if (self::$lastpage > $numpages) {
-            if (self::$current > $show) { self::$page = self::$current - $show; } else { self::$page = 1; }
+            if (self::$current > $show) { self::$page = self::$current - $show; }else { self::$page = 1; }
 
             if (self::$current < (self::$lastpage - $show)) {
                 self::$lastpage = self::$current + $show;
-                if (self::$current <= $show) {self::$lastpage = self::$current + ($numpages - self::$current); }
-            } else { self::$page = self::$current - ($numpages - ((ceil($records / $maxshown) - self::$current)) - 1); }
-        } else { self::$page = 1; }
+                if (self::$current <= $show) { self::$lastpage = self::$current + ($numpages - self::$current); }
+            }else { self::$page = self::$current - ($numpages - ((ceil($records / $maxshown) - self::$current)) - 1); }
+        }else { self::$page = 1; }
     }
 }
