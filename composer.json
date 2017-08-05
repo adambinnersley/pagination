@@ -13,6 +13,13 @@
         }
     ],
     "autoload": {
-        "classmap": ["src/"]
+        "psr-4": {
+            "Pager\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Pager\\Tests\\": "tests/"
+        }
     }
 }
