@@ -73,10 +73,11 @@ class Pagination {
         if (self::$lastpage > $numpages) {
             self::$page = (self::$current > $show ? (self::$current - $show) : 1);
             if (self::$current < (self::$lastpage - $show)) {
-                self::$lastpage = self::$current + $show;
-                if (self::$current <= $show) { self::$lastpage = self::$current + ($numpages - self::$current); }
-            } else { self::$page = self::$current - ($numpages - ((ceil($records / $maxshown) - self::$current)) - 1); }
-        } else { self::$page = 1; }
+                self::$lastpage = ((self::$current <= $show) ? (self::$current + ($numpages - self::$current)) : (self::$current + $show));
+            }
+            else { self::$page = self::$current - ($numpages - ((ceil($records / $maxshown) - self::$current)) - 1); }
+        }
+        else { self::$page = 1; }
     }
     
     /**
@@ -84,7 +85,7 @@ class Pagination {
      * @param boolean $arrows If you want to display previous arrows set to true else set to false
      * @return string Any previous link arrows will be returned as a string
      */
-    protected function preLinks($arrows = true){
+    protected function preLinks($arrows = true) {
         $paging = '';
         if (self::$current != 1 && $arrows) {
             if (self::$current != 2) { $paging .= $this->buildLink('', '&laquo;'); }
@@ -98,7 +99,7 @@ class Pagination {
      * @param boolean $arrows If you want to display next arrows set to true else set to false
      * @return string Any next link arrows will be returned as a string
      */
-    protected function postLinks($arrows = true){
+    protected function postLinks($arrows = true) {
         $paging = '';
         if (self::$current != self::$lastpage && $arrows) {
             $paging .= $this->buildLink((self::$current + 1), '&gt;');
