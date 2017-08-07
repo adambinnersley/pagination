@@ -26,15 +26,14 @@ class Pagination {
         if ($records > $maxshown) {
             self::$current = $start >= 1 ? intval($start) : 1;
             self::$lastpage = ceil($records / $maxshown);
-            
             self::getPage($records, $maxshown, $numpagesshown);
-            $paging = '<ul class="pagination">' . $this->preLinks($arrows);
-  
+            
+            $paging = '<ul class="pagination">'.$this->preLinks($arrows);
             while (self::$page <= self::$lastpage) {
                 $paging .= $this->buildLink(self::$page, self::$page, (self::$current == self::$page));
                 self::$page = (self::$page + 1);
             }
-            return $paging . $this->postLinks($arrows) . '</ul>';
+            return $paging.$this->postLinks($arrows).'</ul>';
         }
         return false;
     }
@@ -46,7 +45,7 @@ class Pagination {
      * @param boolean $current If this is the current link item set this as true so the class is added to the link item
      * @return string This will return the paging item as a string
      */
-    protected function buildLink($link, $page, $current = false){
+    protected function buildLink($link, $page, $current = false) {
         return '<li'.($current === true ? ' class="active"' : '').'><a href="'.self::$pageURL.'?'.$this->buildQueryString($link).'">'.$page.'</a></li>';
     }
     
@@ -55,8 +54,8 @@ class Pagination {
      * @param mixed $page If the page variable is set to a number will add the page number to the query string else will not add any additional items
      * @return string The complete string will be returned to add to the link item
      */
-    protected function buildQueryString($page){
-        if(is_numeric($page)){
+    protected function buildQueryString($page) {
+        if (is_numeric($page)) {
             $this->queryString['page'] = $page;
         }
         return http_build_query(array_filter($this->queryString));
@@ -72,8 +71,7 @@ class Pagination {
     protected static function getPage($records, $maxshown, $numpages) {
         $show = floor($numpages / 2);
         if (self::$lastpage > $numpages) {
-            if (self::$current > $show) { self::$page = self::$current - $show; } else { self::$page = 1; }
-
+            self::$page = (self::$current > $show ? (self::$current - $show) : 1);
             if (self::$current < (self::$lastpage - $show)) {
                 self::$lastpage = self::$current + $show;
                 if (self::$current <= $show) { self::$lastpage = self::$current + ($numpages - self::$current); }
