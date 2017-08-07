@@ -26,7 +26,7 @@ class Pagination {
         if ($records > $maxshown) {
             self::$current = $start >= 1 ? intval($start) : 1;
             self::$lastpage = ceil($records / $maxshown);
-            self::getPage($records, $maxshown, $numpagesshown);
+            $this->getPage($records, $maxshown, $numpagesshown);
             
             $paging = '<ul class="pagination">'.$this->preLinks($arrows);
             while (self::$page <= self::$lastpage) {
@@ -68,7 +68,7 @@ class Pagination {
      * @param int $numpages The number of pagination buttons to display
      * return void Nothing is returned
      */
-    protected static function getPage($records, $maxshown, $numpages) {
+    protected function getPage($records, $maxshown, $numpages) {
         $show = floor($numpages / 2);
         if (self::$lastpage > $numpages) {
             self::$page = (self::$current > $show ? (self::$current - $show) : 1);
