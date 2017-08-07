@@ -3,7 +3,7 @@ namespace Pager;
 
 class Pagination {
     public static $current;
-    protected $queryString;
+    protected static $queryString;
 
     protected static $page;
     protected static $pageURL;
@@ -22,7 +22,7 @@ class Pagination {
      */
     public static function paging($records, $pageURL, $start = 0, $additional = array(), $maxshown = 50, $numpagesshown = 11, $arrows = true) {
         self::$pageURL = $pageURL;
-        $this->queryString = $additional;
+        self::$queryString = $additional;
         if ($records > $maxshown) {
             self::$current = $start >= 1 ? intval($start) : 1;
             self::$lastpage = ceil($records / $maxshown);
