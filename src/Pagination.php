@@ -3,7 +3,7 @@ namespace Pager;
 
 class Pagination {
     public static $current;
-    protected $queryString = array();
+    protected $queryString;
 
     protected static $page;
     protected static $pageURL;
