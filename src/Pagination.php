@@ -9,6 +9,49 @@ class Pagination {
     protected static $pageURL;
     protected static $lastpage;
     
+    public static $pagerClass = 'pagination';
+    public static $liActiveClass= 'active';
+    
+    /**
+     * Sets the class assigned to the UL element of the pagination object
+     * @param string $class This should be the class or classes that you wish to give to the pagination object 
+     * @return $this
+     */
+    public function setPaginationClass($class){
+        if((!empty(trim($class)))){
+            $this->pagerClass = $class;
+        }
+        return $this;
+    }
+    
+    /**
+     * Returns the class to give to the pagination object
+     * @return type
+     */
+    public function getPaginationClass(){
+        return $this->pagerClass;
+    }
+    
+    /**
+     * Sets the active class to assign on the li elements
+     * @param string $class This should be the class to assign on active elements
+     * @return $this
+     */
+    public function setActiveClass($class){
+        if((!empty(trim($class)))){
+            $this->liActiveClass = $class;
+        }
+        return $this;
+    }
+
+    /**
+     * Returns the class to assign to active li elements
+     * @return string $class This should be the class to assign on active elements
+     */
+    public function getActiveClass(){
+        return $this->liActiveClass;
+    }
+    
     /**
      * Returns paging buttons for the number of records
      * @param int $records The total number of records
@@ -20,7 +63,7 @@ class Pagination {
      * @param boolean $arrows If you want arrows to display before and after for next and previous set to true (default) else set to false
      * @return string Returns the pagination menu
      */
-    public static function paging($records, $pageURL, $start = 0, $additional = array(), $maxshown = 50, $numpagesshown = 11, $arrows = true) {
+    public function paging($records, $pageURL, $start = 0, $additional = array(), $maxshown = 50, $numpagesshown = 11, $arrows = true) {
         self::$pageURL = $pageURL;
         self::$queryString = $additional;
         if ($records > $maxshown) {
@@ -28,7 +71,7 @@ class Pagination {
             self::$lastpage = ceil($records / $maxshown);
             $this->getPage($records, $maxshown, $numpagesshown);
             
-            $paging = '<ul class="pagination">'.$this->preLinks($arrows);
+            $paging = '<ul class="'.self::getPaginationClass().'">'.$this->preLinks($arrows);
             while (self::$page <= self::$lastpage) {
                 $paging .= $this->buildLink(self::$page, self::$page, (self::$current == self::$page));
                 self::$page = (self::$page + 1);
@@ -46,7 +89,7 @@ class Pagination {
      * @return string This will return the paging item as a string
      */
     protected function buildLink($link, $page, $current = false) {
-        return '<li'.($current === true ? ' class="active"' : '').'><a href="'.self::$pageURL.'?'.$this->buildQueryString($link).'">'.$page.'</a></li>';
+        return '<li'.(($current === true && !empty(self::getActiveClass())) ? ' class="'.self::getActiveClass().'"' : '').'><a href="'.self::$pageURL.'?'.$this->buildQueryString($link).'" title="Page '.$page.'">'.$page.'</a></li>';
     }
     
     /**
