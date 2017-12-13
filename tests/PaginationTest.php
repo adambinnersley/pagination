@@ -31,7 +31,7 @@ class PaginationTest extends TestCase{
      * @covers Pager\Pagination::getPage
      */
     public function testNoPagerNeeded(){
-        
+        $this->markTestIncomplete('Test not yet implemented');
     }
     
     /**
@@ -42,7 +42,7 @@ class PaginationTest extends TestCase{
      * @covers Pager\Pagination::postLinks
      */
     public function testPagerWithArrows(){
-        
+        $this->markTestIncomplete('Test not yet implemented');
     }
     
     /**
@@ -53,6 +53,6 @@ class PaginationTest extends TestCase{
      * @covers Pager\Pagination::postLinks
      */
     public function testPagerWithQueryString(){
-        
+        $this->markTestIncomplete('Test not yet implemented');
     }
 }
