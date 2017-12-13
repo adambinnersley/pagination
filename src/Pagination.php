@@ -9,8 +9,8 @@ class Pagination {
     protected static $pageURL;
     protected static $lastpage;
     
-    public static $pagerClass = 'pagination';
-    public static $liActiveClass= 'active';
+    public $pagerClass = 'pagination';
+    public $liActiveClass = 'active';
     
     /**
      * Sets the class assigned to the UL element of the pagination object
