@@ -57,13 +57,13 @@ class Pagination {
      * @param int $records The total number of records
      * @param string $pageURL The URL of the page you are creating the paging for
      * @param int $start The start number for the results
-     * @param array $additional Any additional get values to include in the URL
      * @param int $maxshown The number of records that are shown on each page
      * @param int $numpagesshown The number of pagination buttons to display
      * @param boolean $arrows If you want arrows to display before and after for next and previous set to true (default) else set to false
+     * @param array $additional Any additional get values to include in the URL
      * @return string Returns the pagination menu
      */
-    public function paging($records, $pageURL, $start = 0, $additional = array(), $maxshown = 50, $numpagesshown = 11, $arrows = true) {
+    public function paging($records, $pageURL, $start = 0, $maxshown = 50, $numpagesshown = 11, $arrows = true, $additional = array()) {
         self::$pageURL = $pageURL;
         $this->queryString = $additional;
         if ($records > $maxshown) {
