@@ -32,6 +32,7 @@ class PaginationTest extends TestCase{
      */
     public function testNoPagerNeeded(){
         $this->assertEquals('', $this->pagination->paging(10, '/test-page'));
+        $this->markTestIncomplete('Test not yet implemented');
     }
     
     /**
@@ -76,11 +77,11 @@ class PaginationTest extends TestCase{
      * @covers Pager\Pagination::getPaginationClass
      */
     public function testSetActiveClass(){
-        $this->assertEquals('active', $this->pagination->getPaginationClass());
-        $this->pagination->setPaginationClass('current');
-        $this->assertNotEquals('active', $this->pagination->getPaginationClass());
-        $this->assertEquals('current', $this->pagination->getPaginationClass());
-        $this->pagination->setPaginationClass('current active-class');
-        $this->assertEquals('current active-class', $this->pagination->getPaginationClass());
+        $this->assertEquals('active', $this->pagination->getActiveClass());
+        $this->pagination->setActiveClass('current');
+        $this->assertNotEquals('active', $this->pagination->getActiveClass());
+        $this->assertEquals('current', $this->pagination->getActiveClass());
+        $this->pagination->setActiveClass('current active-class');
+        $this->assertEquals('current active-class', $this->pagination->getActiveClass());
     }
 }
