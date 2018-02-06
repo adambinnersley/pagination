@@ -103,7 +103,7 @@ echo($pagination->paging($numberOfRecords, $pageURL, $currentPage));
     <li><a href="/results.php?page=5" title="Page 5">5</a></li>
     <li><a href="/results.php?page=6" title="Page 6">6</a></li>
     <li><a href="/results.php?page=7" title="Page 7">7</a></li>
-    <li><a href="/results.php?page=2" title="Page &gt;">&gt;</a></li>
+    <li><a href="/results.php?page=4" title="Page &gt;">&gt;</a></li>
     <li><a href="/results.php?page=7" title="Page &raquo;">&raquo;</a></li>
 </ul>
 ```
