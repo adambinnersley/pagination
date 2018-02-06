@@ -101,7 +101,7 @@ class Pagination {
         if (is_numeric($page)) {
             $this->queryString['page'] = $page;
         }
-        return http_build_query(array_filter($this->queryString));
+        return http_build_query(array_filter($this->queryString), '', '&amp;');
     }
     
     /**
