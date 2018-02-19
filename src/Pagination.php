@@ -17,8 +17,8 @@ class Pagination {
      * @param string $class This should be the class or classes that you wish to give to the pagination object 
      * @return $this
      */
-    public function setPaginationClass($class){
-        if((!empty(trim($class)))){
+    public function setPaginationClass($class) {
+        if((!empty(trim($class)))) {
             $this->pagerClass = $class;
         }
         return $this;
@@ -28,7 +28,7 @@ class Pagination {
      * Returns the class to give to the pagination object
      * @return string The pagination class will be returned
      */
-    public function getPaginationClass(){
+    public function getPaginationClass() {
         return $this->pagerClass;
     }
     
@@ -37,8 +37,8 @@ class Pagination {
      * @param string $class This should be the class to assign on active elements
      * @return $this
      */
-    public function setActiveClass($class){
-        if((!empty(trim($class)))){
+    public function setActiveClass($class) {
+        if((!empty(trim($class)))) {
             $this->liActiveClass = $class;
         }
         return $this;
@@ -48,7 +48,7 @@ class Pagination {
      * Returns the class to assign to active li elements
      * @return string $class This should be the class to assign on active elements
      */
-    public function getActiveClass(){
+    public function getActiveClass() {
         return $this->liActiveClass;
     }
     
