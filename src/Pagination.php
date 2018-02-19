@@ -26,7 +26,7 @@ class Pagination {
     
     /**
      * Returns the class to give to the pagination object
-     * @return type
+     * @return string The pagination class will be returned
      */
     public function getPaginationClass(){
         return $this->pagerClass;
@@ -61,7 +61,7 @@ class Pagination {
      * @param int $numpagesshown The number of pagination buttons to display
      * @param boolean $arrows If you want arrows to display before and after for next and previous set to true (default) else set to false
      * @param array $additional Any additional get values to include in the URL
-     * @return string Returns the pagination menu
+     * @return string|false Returns the pagination menu if required else will return false
      */
     public function paging($records, $pageURL, $start = 0, $maxshown = 50, $numpagesshown = 11, $arrows = true, $additional = array()) {
         self::$pageURL = $pageURL;
@@ -71,7 +71,7 @@ class Pagination {
             self::$lastpage = ceil($records / $maxshown);
             $this->getPage($records, $maxshown, $numpagesshown);
             
-            $paging = '<ul class="'.self::getPaginationClass().'">'.$this->preLinks($arrows);
+            $paging = '<ul class="'.$this->getPaginationClass().'">'.$this->preLinks($arrows);
             while (self::$page <= self::$lastpage) {
                 $paging .= $this->buildLink(self::$page, self::$page, (self::$current == self::$page));
                 self::$page = (self::$page + 1);
@@ -89,7 +89,7 @@ class Pagination {
      * @return string This will return the paging item as a string
      */
     protected function buildLink($link, $page, $current = false) {
-        return '<li'.(($current === true && !empty(self::getActiveClass())) ? ' class="'.self::getActiveClass().'"' : '').'><a href="'.self::$pageURL.'?'.$this->buildQueryString($link).'" title="Page '.$page.'">'.$page.'</a></li>';
+        return '<li'.(($current === true && !empty($this->getActiveClass())) ? ' class="'.$this->getActiveClass().'"' : '').'><a href="'.self::$pageURL.'?'.$this->buildQueryString($link).'" title="Page '.$page.'">'.$page.'</a></li>';
     }
     
     /**
