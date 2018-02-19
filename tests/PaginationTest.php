@@ -33,7 +33,11 @@ class PaginationTest extends TestCase{
         $this->assertContains('<li class="active"><a href="/test-page?page=1" title="Page 1">1</a></li>', $pager);
         $this->assertEquals('<ul class="pagination"><li class="active"><a href="/test-page?page=1" title="Page 1">1</a></li><li><a href="/test-page?page=2" title="Page 2">2</a></li><li><a href="/test-page?page=3" title="Page 3">3</a></li><li><a href="/test-page?page=2" title="Page &gt;">&gt;</a></li><li><a href="/test-page?page=3" title="Page &raquo;">&raquo;</a></li></ul>', $pager);
         
-        
+        $alternateCurrent = $this->pagination->paging(106, '/test-page', 3);
+        $this->assertStringStartsWith("<ul", $alternateCurrent);
+        $this->assertStringEndsWith("ul>", $alternateCurrent);
+        $this->assertContains('<li class="active"><a href="/test-page?page=3" title="Page 3">3</a></li>', $pager);
+        $this->assertEquals('<ul class="pagination"><li><a href="/test-page?" title="Page &laquo;">&laquo;</a></li><li><a href="/test-page?page=2" title="Page &lt;">&lt;</a></li><li><a href="/test-page?page=1" title="Page 1">1</a></li><li><a href="/test-page?page=2" title="Page 2">2</a></li><li class="active"><a href="/test-page?page=3" title="Page 3">3</a></li></ul>', $alternateCurrent);
     }
     
     /**
