@@ -4,7 +4,7 @@
 [![Minimum PHP Version](https://img.shields.io/badge/php-%3E%3D%205.6-8892BF.svg?style=flat-circle)](https://php.net/)
 
 # Pagination
-
+Create a HTML pagination element using PHP. Compatible with Bootstrap and easily customisable classes.
 
 ## Installation
 
