@@ -20,30 +20,47 @@ class PaginationTest extends TestCase{
      * @covers Pager\Pagination::paging
      * @covers Pager\Pagination::buildLink
      * @covers Pager\Pagination::getPage
+     * @covers Pager\Pagination::buildQueryString
+     * @covers Pager\Pagination::getActiveClass
+     * @covers Pager\Pagination::getPaginationClass
+     * @covers Pager\Pagination::postLinks
+     * @covers Pager\Pagination::preLinks
      */
     public function testCreatePager(){
-        $this->pagination->paging(72, '/test-page');
+        $pager = $this->pagination->paging(106, '/test-page');
+        $this->assertStringStartsWith("<ul", $pager);
+        $this->assertStringEndsWith("ul>", $pager);
+        $this->assertContains('<li class="active"><a href="/test-page?page=1" title="Page 1">1</a></li>', $pager);
+        $this->assertEquals('<ul class="pagination"><li class="active"><a href="/test-page?page=1" title="Page 1">1</a></li><li><a href="/test-page?page=2" title="Page 2">2</a></li><li><a href="/test-page?page=3" title="Page 3">3</a></li><li><a href="/test-page?page=2" title="Page &gt;">&gt;</a></li><li><a href="/test-page?page=3" title="Page &raquo;">&raquo;</a></li></ul>', $pager);
+        
+        
     }
     
     /**
      * @covers Pager\Pagination::paging
      * @covers Pager\Pagination::buildLink
      * @covers Pager\Pagination::getPage
+     * @covers Pager\Pagination::buildQueryString
+     * @covers Pager\Pagination::getActiveClass
+     * @covers Pager\Pagination::getPaginationClass
+     * @covers Pager\Pagination::postLinks
+     * @covers Pager\Pagination::preLinks
      */
     public function testNoPagerNeeded(){
         $this->assertFalse($this->pagination->paging(10, '/test-page'));
     }
     
     /**
-     * @covers Pager\Pagination::setPaginationClass
-     * @covers Pager\Pagination::getPaginationClass
      * @covers Pager\Pagination::paging
      * @covers Pager\Pagination::buildLink
      * @covers Pager\Pagination::getPage
-     * @covers Pager\Pagination::preLinks
+     * @covers Pager\Pagination::buildQueryString
+     * @covers Pager\Pagination::getActiveClass
+     * @covers Pager\Pagination::getPaginationClass
      * @covers Pager\Pagination::postLinks
+     * @covers Pager\Pagination::preLinks
      */
-    public function testPagerWithArrows(){
+    public function testPagerArrows(){
         $this->markTestIncomplete('Test not yet implemented');
     }
     
@@ -51,8 +68,11 @@ class PaginationTest extends TestCase{
      * @covers Pager\Pagination::paging
      * @covers Pager\Pagination::buildLink
      * @covers Pager\Pagination::getPage
-     * @covers Pager\Pagination::preLinks
+     * @covers Pager\Pagination::buildQueryString
+     * @covers Pager\Pagination::getActiveClass
+     * @covers Pager\Pagination::getPaginationClass
      * @covers Pager\Pagination::postLinks
+     * @covers Pager\Pagination::preLinks
      */
     public function testPagerWithQueryString(){
         $this->markTestIncomplete('Test not yet implemented');
