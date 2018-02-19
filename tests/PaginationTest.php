@@ -36,8 +36,19 @@ class PaginationTest extends TestCase{
         $alternateCurrent = $this->pagination->paging(106, '/test-page', 3);
         $this->assertStringStartsWith("<ul", $alternateCurrent);
         $this->assertStringEndsWith("ul>", $alternateCurrent);
-        $this->assertContains('<li class="active"><a href="/test-page?page=3" title="Page 3">3</a></li>', $pager);
+        $this->assertContains('<li class="active"><a href="/test-page?page=3" title="Page 3">3</a></li>', $alternateCurrent);
         $this->assertEquals('<ul class="pagination"><li><a href="/test-page?" title="Page &laquo;">&laquo;</a></li><li><a href="/test-page?page=2" title="Page &lt;">&lt;</a></li><li><a href="/test-page?page=1" title="Page 1">1</a></li><li><a href="/test-page?page=2" title="Page 2">2</a></li><li class="active"><a href="/test-page?page=3" title="Page 3">3</a></li></ul>', $alternateCurrent);
+        
+        $maxLinks = $this->pagination->paging(2506, '/test-page', 0, 50, 11, true);
+        $this->assertContains('Page 11', $maxLinks);
+        $this->assertNotContains('Page 12', $maxLinks);
+        
+        $maxLinksDiff = $this->pagination->paging(2506, '/test-page', 8, 50, 11, true);
+        $this->assertContains('Page 12', $maxLinksDiff);
+        $this->assertContains('&gt;', $maxLinksDiff);
+        $this->assertContains('&lt;', $maxLinksDiff);
+        $this->assertContains('&raquo;', $maxLinksDiff);
+        $this->assertContains('&laquo;', $maxLinksDiff);
     }
     
     /**
@@ -65,7 +76,13 @@ class PaginationTest extends TestCase{
      * @covers Pager\Pagination::preLinks
      */
     public function testPagerArrows(){
-        $this->markTestIncomplete('Test not yet implemented');
+        $pager = $this->pagination->paging(320, '/test-page', 3, 50, 11, true);
+        $this->assertContains('&lt;', $pager);
+        $this->assertContains('&gt;', $pager);
+        
+        $pagerNoArrows = $this->pagination->paging(320, '/test-page', 3, 50, 11, false);
+        $this->assertNotContains('&lt;', $pagerNoArrows);
+        $this->assertNotContains('&gt;', $pagerNoArrows);
     }
     
     /**
@@ -78,8 +95,8 @@ class PaginationTest extends TestCase{
      * @covers Pager\Pagination::postLinks
      * @covers Pager\Pagination::preLinks
      */
-    public function testPagerWithQueryString(){
-        $this->markTestIncomplete('Test not yet implemented');
+    public function testPagerWithQueryString(){        
+        $this->assertContains('/test-page?search=dave&amp;age=45&amp;page=1', $this->pagination->paging(100, '/test-page', 0, 50, 11, true, array('search' => 'dave', 'age' => '45')));
     }
     
     /**
