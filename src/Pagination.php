@@ -71,12 +71,12 @@ class Pagination {
             self::$lastpage = ceil($records / $maxshown);
             $this->getPage($records, $maxshown, $numpagesshown);
             
-            $paging = '<ul class="'.$this->getPaginationClass().'">'.$this->preLinks($arrows);
+            $paging = '<nav><ul class="'.$this->getPaginationClass().'">'.$this->preLinks($arrows);
             while (self::$page <= self::$lastpage) {
                 $paging .= $this->buildLink(self::$page, self::$page, (self::$current == self::$page));
                 self::$page = (self::$page + 1);
             }
-            return $paging.$this->postLinks($arrows).'</ul>';
+            return $paging.$this->postLinks($arrows).'</ul></nav>';
         }
         return false;
     }
@@ -89,7 +89,7 @@ class Pagination {
      * @return string This will return the paging item as a string
      */
     protected function buildLink($link, $page, $current = false) {
-        return '<li'.(($current === true && !empty($this->getActiveClass())) ? ' class="'.$this->getActiveClass().'"' : '').'><a href="'.self::$pageURL.'?'.$this->buildQueryString($link).'" title="Page '.$page.'">'.$page.'</a></li>';
+        return '<li class="'.(($current === true && !empty($this->getActiveClass())) ? $this->getActiveClass().' ' : '').'page-item"><a href="'.self::$pageURL.'?'.$this->buildQueryString($link).'" class="page-link" title="Page '.$page.'">'.$page.'</a></li>';
     }
     
     /**
