@@ -28,16 +28,16 @@ class PaginationTest extends TestCase{
      */
     public function testCreatePager(){
         $pager = $this->pagination->paging(106, '/test-page');
-        $this->assertStringStartsWith("<ul", $pager);
-        $this->assertStringEndsWith("ul>", $pager);
-        $this->assertContains('<li class="active"><a href="/test-page?page=1" title="Page 1">1</a></li>', $pager);
-        $this->assertEquals('<ul class="pagination"><li class="active"><a href="/test-page?page=1" title="Page 1">1</a></li><li><a href="/test-page?page=2" title="Page 2">2</a></li><li><a href="/test-page?page=3" title="Page 3">3</a></li><li><a href="/test-page?page=2" title="Page &gt;">&gt;</a></li><li><a href="/test-page?page=3" title="Page &raquo;">&raquo;</a></li></ul>', $pager);
+        $this->assertStringStartsWith("<nav><ul", $pager);
+        $this->assertStringEndsWith("ul></nav>", $pager);
+        $this->assertContains('<li class="active page-item"><a href="/test-page?page=1" class="page-link" title="Page 1">1</a></li>', $pager);
+        $this->assertEquals('<nav><ul class="pagination"><li class="active page-item"><a href="/test-page?page=1" class="page-link" title="Page 1">1</a></li><li class="page-item"><a href="/test-page?page=2" class="page-link" title="Page 2">2</a></li><li class="page-item"><a href="/test-page?page=3" class="page-link" title="Page 3">3</a></li><li class="page-item"><a href="/test-page?page=2" class="page-link" title="Page &gt;">&gt;</a></li><li class="page-item"><a href="/test-page?page=3" class="page-link" title="Page &raquo;">&raquo;</a></li></ul></nav>', $pager);
         
         $alternateCurrent = $this->pagination->paging(106, '/test-page', 3);
-        $this->assertStringStartsWith("<ul", $alternateCurrent);
-        $this->assertStringEndsWith("ul>", $alternateCurrent);
-        $this->assertContains('<li class="active"><a href="/test-page?page=3" title="Page 3">3</a></li>', $alternateCurrent);
-        $this->assertEquals('<ul class="pagination"><li><a href="/test-page?" title="Page &laquo;">&laquo;</a></li><li><a href="/test-page?page=2" title="Page &lt;">&lt;</a></li><li><a href="/test-page?page=1" title="Page 1">1</a></li><li><a href="/test-page?page=2" title="Page 2">2</a></li><li class="active"><a href="/test-page?page=3" title="Page 3">3</a></li></ul>', $alternateCurrent);
+        $this->assertStringStartsWith("<nav><ul", $alternateCurrent);
+        $this->assertStringEndsWith("ul></nav>", $alternateCurrent);
+        $this->assertContains('<li class="active page-item"><a href="/test-page?page=3" class="page-link" title="Page 3">3</a></li>', $alternateCurrent);
+        $this->assertEquals('<nav><ul class="pagination"><li class="page-item"><a href="/test-page?" class="page-link" title="Page &laquo;">&laquo;</a></li><li class="page-item"><a href="/test-page?page=2" class="page-link" title="Page &lt;">&lt;</a></li><li class="page-item"><a href="/test-page?page=1" class="page-link" title="Page 1">1</a></li><li class="page-item"><a href="/test-page?page=2" class="page-link" title="Page 2">2</a></li><li class="active page-item"><a href="/test-page?page=3" class="page-link" title="Page 3">3</a></li></ul></nav>', $alternateCurrent);
         
         $maxLinks = $this->pagination->paging(2506, '/test-page', 0, 50, 11, true);
         $this->assertContains('Page 11', $maxLinks);
