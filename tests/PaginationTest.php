@@ -96,7 +96,7 @@ class PaginationTest extends TestCase{
      * @covers Pager\Pagination::preLinks
      */
     public function testPagerWithQueryString(){        
-        $this->assertContains('/test-page?search=dave&amp;age=45&amp;page=1', $this->pagination->paging(100, '/test-page', 0, 50, 11, true, array('search' => 'dave', 'age' => '45')));
+        $this->assertContains('/test-page?page=1&amp;search=dave&amp;age=45', $this->pagination->paging(100, '/test-page', 0, 50, 11, true, array('search' => 'dave', 'age' => '45')));
     }
     
     /**
