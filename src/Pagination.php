@@ -98,10 +98,8 @@ class Pagination {
      * @return string The complete string will be returned to add to the link item
      */
     protected function buildQueryString($page) {
-        if (is_numeric($page)) {
-            $this->queryString['page'] = $page;
-        }
-        return http_build_query(array_filter($this->queryString), '', '&amp;');
+        $pageInfo = is_numeric($page) ? ['page' => $page] : [];
+        return http_build_query(array_filter(array_merge($pageInfo, $this->queryString)), '', '&amp;');
     }
     
     /**
