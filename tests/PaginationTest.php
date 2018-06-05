@@ -37,7 +37,7 @@ class PaginationTest extends TestCase{
         $this->assertStringStartsWith("<ul", $alternateCurrent);
         $this->assertStringEndsWith("ul>", $alternateCurrent);
         $this->assertContains('<li class="active"><a href="/test-page?page=3" title="Page 3">3</a></li>', $alternateCurrent);
-        $this->assertEquals('<ul class="pagination"><li><a href="/test-page?" title="Page &laquo;">&laquo;</a></li><li><a href="/test-page?page=2" title="Page &lt;">&lt;</a></li><li><a href="/test-page?page=1" title="Page 1">1</a></li><li><a href="/test-page?page=2" title="Page 2">2</a></li><li class="active"><a href="/test-page?page=3" title="Page 3">3</a></li></ul>', $alternateCurrent);
+        $this->assertEquals('<ul class="pagination"><li><a href="/test-page" title="Page &laquo;">&laquo;</a></li><li><a href="/test-page?page=2" title="Page &lt;">&lt;</a></li><li><a href="/test-page?page=1" title="Page 1">1</a></li><li><a href="/test-page?page=2" title="Page 2">2</a></li><li class="active"><a href="/test-page?page=3" title="Page 3">3</a></li></ul>', $alternateCurrent);
         
         $maxLinks = $this->pagination->paging(2506, '/test-page', 0, 50, 11, true);
         $this->assertContains('Page 11', $maxLinks);

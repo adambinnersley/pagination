@@ -8,6 +8,7 @@ class Pagination {
     protected static $page;
     protected static $pageURL;
     protected static $lastpage;
+    protected static $totalPages;
     
     public $pagerClass = 'pagination';
     public $liActiveClass = 'active';
@@ -68,7 +69,8 @@ class Pagination {
         $this->queryString = $additional;
         if ($records > $maxshown) {
             self::$current = $start >= 1 ? intval($start) : 1;
-            self::$lastpage = ceil($records / $maxshown);
+            self::$totalPages = ceil($records / $maxshown);
+            self::$lastpage = self::$totalPages;
             $this->getPage($records, $maxshown, $numpagesshown);
             
             $paging = '<ul class="'.$this->getPaginationClass().'">'.$this->preLinks($arrows);
@@ -142,9 +144,9 @@ class Pagination {
      */
     protected function postLinks($arrows = true) {
         $paging = '';
-        if (self::$current != self::$lastpage && $arrows) {
+        if (self::$current != self::$totalPages && $arrows) {
             $paging .= $this->buildLink((self::$current + 1), '&gt;');
-            if (self::$current != (self::$lastpage - 1)) { $paging .= $this->buildLink(self::$lastpage, '&raquo;'); }
+            if (self::$current != (self::$totalPages - 1)) { $paging .= $this->buildLink(self::$totalPages, '&raquo;'); }
         }
         return $paging;
     }
