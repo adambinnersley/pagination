@@ -95,7 +95,7 @@ echo($pagination->paging($numberOfRecords, $pageURL, $currentPage));
 #### HTML Output
 ```html
 <ul class="my_custom_pager">
-    <li><a href="/results.php?" title="Page &laquo;">&laquo;</a></li>
+    <li><a href="/results.php" title="Page &laquo;">&laquo;</a></li>
     <li><a href="/results.php?page=2" title="Page &lt;">&lt;</a></li>
     <li><a href="/results.php?page=1" title="Page 1">1</a></li>
     <li><a href="/results.php?page=2" title="Page 2">2</a></li>
