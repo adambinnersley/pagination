@@ -89,7 +89,7 @@ class Pagination {
      * @return string This will return the paging item as a string
      */
     protected function buildLink($link, $page, $current = false) {
-        return '<li'.(($current === true && !empty($this->getActiveClass())) ? ' class="'.$this->getActiveClass().'"' : '').'><a href="'.self::$pageURL.'?'.$this->buildQueryString($link).'" title="Page '.$page.'">'.$page.'</a></li>';
+        return '<li'.(($current === true && !empty($this->getActiveClass())) ? ' class="'.$this->getActiveClass().'"' : '').'><a href="'.self::$pageURL.(!empty($this->buildQueryString($link)) ? '?'.$this->buildQueryString($link) : '').'" title="Page '.$page.'">'.$page.'</a></li>';
     }
     
     /**
