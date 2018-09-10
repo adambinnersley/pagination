@@ -42,7 +42,7 @@ class Pagination {
      * @return $this
      */
     public function setLiClass($class){
-        if(is_string(trim($class))) {
+        if(is_string($class)) {
             $this->liClass = trim($class);
         }
         return $this;
@@ -62,7 +62,7 @@ class Pagination {
      * @return $this
      */
     public function setLiActiveClass($class) {
-        if(is_string(trim($class))) {
+        if(is_string($class)) {
             $this->liActiveClass = trim($class);
         }
         return $this;
@@ -83,7 +83,7 @@ class Pagination {
      * @return $this
      */
     public function setAClass($class){
-        if(is_string(trim($class))) {
+        if(is_string($class)) {
             $this->aClass = trim($class);
         }
         return $this;
@@ -103,7 +103,7 @@ class Pagination {
      * @return $this
      */
     public function setAActiveClass($class){
-        if(is_string(trim($class))) {
+        if(is_string($class)) {
             $this->aActiveClass = trim($class);
         }
         return $this;
