@@ -10,8 +10,11 @@ class Pagination {
     protected static $lastpage;
     protected static $totalPages;
     
-    public $pagerClass = 'pagination';
+    public $pagerClass = 'pagination justify-content-center';
+    public $liClass = 'page-item';
     public $liActiveClass = 'active';
+    public $aClass = 'page-link';
+    public $aActiveClass = '';
     
     /**
      * Sets the class assigned to the UL element of the pagination object
@@ -34,11 +37,31 @@ class Pagination {
     }
     
     /**
+     * Sets the default li class
+     * @param string $class This should be the class that you want to all to all li elements
+     * @return $this
+     */
+    public function setLiClass($class){
+        if((!empty(trim($class)))) {
+            $this->liClass = $class;
+        }
+        return $this;
+    }
+    
+    /**
+     * Gets the current li class
+     * @return string This should be the class to assign on li elements
+     */
+    public function getLiClass() {
+        return $this->liClass;
+    }
+    
+    /**
      * Sets the active class to assign on the li elements
      * @param string $class This should be the class to assign on active elements
      * @return $this
      */
-    public function setActiveClass($class) {
+    public function setLiActiveClass($class) {
         if((!empty(trim($class)))) {
             $this->liActiveClass = $class;
         }
@@ -47,10 +70,51 @@ class Pagination {
 
     /**
      * Returns the class to assign to active li elements
-     * @return string $class This should be the class to assign on active elements
+     * @return string This should be the class to assign on active elements
      */
-    public function getActiveClass() {
+    public function getLiActiveClass() {
         return $this->liActiveClass;
+    }
+    
+    
+    /**
+     * Sets the default class on a elements
+     * @param string $class This should be the class to add to a elements
+     * @return $this
+     */
+    public function setAClass($class){
+        if((!empty(trim($class)))) {
+            $this->aClass = $class;
+        }
+        return $this;
+    }
+    
+    /**
+     * Returns the class assigned to a elements
+     * @return string Returns the class assigned to a elements
+     */
+    public function getAClass() {
+        return $this->aClass;
+    }
+    
+    /**
+     * Sets the class to assign to active a elements
+     * @param string $class This should be the class to add to active a elements
+     * @return $this
+     */
+    public function setAActiveClass($class){
+        if((!empty(trim($class)))) {
+            $this->aActiveClass = $class;
+        }
+        return $this;
+    }
+    
+    /**
+     * Returns the class assigned to active a elements 
+     * @return string This should be the class to add to active a elements
+     */
+    public function getAActiveClass() {
+        return $this->aActiveClass;
     }
     
     /**
@@ -91,7 +155,7 @@ class Pagination {
      * @return string This will return the paging item as a string
      */
     protected function buildLink($link, $page, $current = false) {
-        return '<li'.(($current === true && !empty($this->getActiveClass())) ? ' class="'.$this->getActiveClass().'"' : '').'><a href="'.self::$pageURL.(!empty($this->buildQueryString($link)) ? '?'.$this->buildQueryString($link) : '').'" title="Page '.$page.'">'.$page.'</a></li>';
+        return '<li class="'.$this->getLiClass().(($current === true && !empty($this->getLiActiveClass())) ? ' '.$this->getLiActiveClass() : '').'"><a href="'.self::$pageURL.(!empty($this->buildQueryString($link)) ? '?'.$this->buildQueryString($link) : '').'" title="Page '.$page.'" class="'.$this->getAClass().(($current === true && !empty($this->getAActiveClass())) ? ' '.$this->getAActiveClass() : '').'">'.$page.'</a></li>';
     }
     
     /**
