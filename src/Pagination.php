@@ -42,8 +42,8 @@ class Pagination {
      * @return $this
      */
     public function setLiClass($class){
-        if((!empty(trim($class)))) {
-            $this->liClass = $class;
+        if(is_string(trim($class))) {
+            $this->liClass = trim($class);
         }
         return $this;
     }
@@ -62,8 +62,8 @@ class Pagination {
      * @return $this
      */
     public function setLiActiveClass($class) {
-        if((!empty(trim($class)))) {
-            $this->liActiveClass = $class;
+        if(is_string(trim($class))) {
+            $this->liActiveClass = trim($class);
         }
         return $this;
     }
@@ -83,8 +83,8 @@ class Pagination {
      * @return $this
      */
     public function setAClass($class){
-        if((!empty(trim($class)))) {
-            $this->aClass = $class;
+        if(is_string(trim($class))) {
+            $this->aClass = trim($class);
         }
         return $this;
     }
@@ -103,8 +103,8 @@ class Pagination {
      * @return $this
      */
     public function setAActiveClass($class){
-        if((!empty(trim($class)))) {
-            $this->aActiveClass = $class;
+        if(is_string(trim($class))) {
+            $this->aActiveClass = trim($class);
         }
         return $this;
     }
@@ -155,7 +155,7 @@ class Pagination {
      * @return string This will return the paging item as a string
      */
     protected function buildLink($link, $page, $current = false) {
-        return '<li class="'.$this->getLiClass().(($current === true && !empty($this->getLiActiveClass())) ? ' '.$this->getLiActiveClass() : '').'"><a href="'.self::$pageURL.(!empty($this->buildQueryString($link)) ? '?'.$this->buildQueryString($link) : '').'" title="Page '.$page.'" class="'.$this->getAClass().(($current === true && !empty($this->getAActiveClass())) ? ' '.$this->getAActiveClass() : '').'">'.$page.'</a></li>';
+        return '<li'.(!empty($this->getLiClass()) || ($current === true && !empty($this->getLiActiveClass())) ? ' class="'.trim($this->getLiClass().(($current === true && !empty($this->getLiActiveClass())) ? ' '.$this->getLiActiveClass() : '').'"') : '').'><a href="'.self::$pageURL.(!empty($this->buildQueryString($link)) ? '?'.$this->buildQueryString($link) : '').'" title="Page '.$page.'"'.(!empty($this->getAClass()) || ($current === true && !empty($this->getAActiveClass())) ? ' class="'.trim($this->getAClass().(($current === true && !empty($this->getAActiveClass())) ? ' '.$this->getAActiveClass() : '')).'"' : '').'>'.$page.'</a></li>';
     }
     
     /**
