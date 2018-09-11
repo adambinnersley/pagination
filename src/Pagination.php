@@ -22,7 +22,7 @@ class Pagination {
      * @return $this
      */
     public function setPaginationClass($class) {
-        if((!empty(trim($class)))) {
+        if ((!empty(trim($class)))) {
             $this->pagerClass = $class;
         }
         return $this;
@@ -41,7 +41,7 @@ class Pagination {
      * @param string $class This should be the class that you want to all to all li elements
      * @return $this
      */
-    public function setLiClass($class){
+    public function setLiClass($class) {
         $this->liClass = trim($class);
         return $this;
     }
@@ -78,7 +78,7 @@ class Pagination {
      * @param string $class This should be the class to add to a elements
      * @return $this
      */
-    public function setAClass($class){
+    public function setAClass($class) {
         $this->aClass = trim($class);
         return $this;
     }
@@ -96,7 +96,7 @@ class Pagination {
      * @param string $class This should be the class to add to active a elements
      * @return $this
      */
-    public function setAActiveClass($class){
+    public function setAActiveClass($class) {
         $this->aActiveClass = trim($class);
         return $this;
     }
