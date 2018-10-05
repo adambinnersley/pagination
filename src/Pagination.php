@@ -125,7 +125,7 @@ class Pagination {
         $this->queryString = $additional;
         if ($records > $maxshown) {
             self::$current = $start >= 1 ? intval($start) : 1;
-            self::$totalPages = ceil($records / $maxshown);
+            self::$totalPages = ceil(intval($records) / ($maxshown >= 1 ? intval($maxshown) : 1));
             self::$lastpage = self::$totalPages;
             $this->getPage($records, $maxshown, $numpagesshown);
             
@@ -174,7 +174,7 @@ class Pagination {
             if (self::$current < (self::$lastpage - $show)) {
                 self::$lastpage = ((self::$current <= $show) ? (self::$current + ($numpages - self::$current)) : (self::$current + $show));
             }
-            else { self::$page = self::$current - ($numpages - ((ceil($records / $maxshown) - self::$current)) - 1); }
+            else { self::$page = self::$current - ($numpages - ((ceil(intval($records) / ($maxshown >= 1 ? intval($maxshown) : 1)) - self::$current)) - 1); }
         }
         else { self::$page = 1; }
     }
