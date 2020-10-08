@@ -1,5 +1,6 @@
 /nbproject/
 /vendor/
-composer.lock
+*.lock
+*.bak
 .gitignore
 clover.xml
