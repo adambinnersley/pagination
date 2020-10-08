@@ -1,7 +1,8 @@
 <?php
 namespace Pager;
 
-class Pagination {
+class Pagination
+{
     public static $current;
     protected $queryString;
 
@@ -18,10 +19,11 @@ class Pagination {
     
     /**
      * Sets the class assigned to the UL element of the pagination object
-     * @param string $class This should be the class or classes that you wish to give to the pagination object 
+     * @param string $class This should be the class or classes that you wish to give to the pagination object
      * @return $this
      */
-    public function setPaginationClass($class) {
+    public function setPaginationClass($class)
+    {
         if ((!empty(trim($class)))) {
             $this->pagerClass = $class;
         }
@@ -32,7 +34,8 @@ class Pagination {
      * Returns the class to give to the pagination object
      * @return string The pagination class will be returned
      */
-    public function getPaginationClass() {
+    public function getPaginationClass()
+    {
         return $this->pagerClass;
     }
     
@@ -41,7 +44,8 @@ class Pagination {
      * @param string $class This should be the class that you want to all to all li elements
      * @return $this
      */
-    public function setLiClass($class) {
+    public function setLiClass($class)
+    {
         $this->liClass = trim($class);
         return $this;
     }
@@ -50,7 +54,8 @@ class Pagination {
      * Gets the current li class
      * @return string This should be the class to assign on li elements
      */
-    public function getLiClass() {
+    public function getLiClass()
+    {
         return $this->liClass;
     }
     
@@ -59,7 +64,8 @@ class Pagination {
      * @param string $class This should be the class to assign on active elements
      * @return $this
      */
-    public function setLiActiveClass($class) {
+    public function setLiActiveClass($class)
+    {
         $this->liActiveClass = trim($class);
         return $this;
     }
@@ -68,7 +74,8 @@ class Pagination {
      * Returns the class to assign to active li elements
      * @return string This should be the class to assign on active elements
      */
-    public function getLiActiveClass() {
+    public function getLiActiveClass()
+    {
         return $this->liActiveClass;
     }
     
@@ -78,7 +85,8 @@ class Pagination {
      * @param string $class This should be the class to add to a elements
      * @return $this
      */
-    public function setAClass($class) {
+    public function setAClass($class)
+    {
         $this->aClass = trim($class);
         return $this;
     }
@@ -87,7 +95,8 @@ class Pagination {
      * Returns the class assigned to a elements
      * @return string Returns the class assigned to a elements
      */
-    public function getAClass() {
+    public function getAClass()
+    {
         return $this->aClass;
     }
     
@@ -96,16 +105,18 @@ class Pagination {
      * @param string $class This should be the class to add to active a elements
      * @return $this
      */
-    public function setAActiveClass($class) {
+    public function setAActiveClass($class)
+    {
         $this->aActiveClass = trim($class);
         return $this;
     }
     
     /**
-     * Returns the class assigned to active a elements 
+     * Returns the class assigned to active a elements
      * @return string This should be the class to add to active a elements
      */
-    public function getAActiveClass() {
+    public function getAActiveClass()
+    {
         return $this->aActiveClass;
     }
     
@@ -120,7 +131,8 @@ class Pagination {
      * @param array $additional Any additional get values to include in the URL
      * @return string|false Returns the pagination menu if required else will return false
      */
-    public function paging($records, $pageURL, $start = 0, $maxshown = 50, $numpagesshown = 11, $arrows = true, $additional = array()) {
+    public function paging($records, $pageURL, $start = 0, $maxshown = 50, $numpagesshown = 11, $arrows = true, $additional = array())
+    {
         self::$pageURL = $pageURL;
         $this->queryString = $additional;
         if ($records > $maxshown) {
@@ -146,7 +158,8 @@ class Pagination {
      * @param boolean $current If this is the current link item set this as true so the class is added to the link item
      * @return string This will return the paging item as a string
      */
-    protected function buildLink($link, $page, $current = false) {
+    protected function buildLink($link, $page, $current = false)
+    {
         return '<li'.(!empty($this->getLiClass()) || ($current === true && !empty($this->getLiActiveClass())) ? ' class="'.trim($this->getLiClass().(($current === true && !empty($this->getLiActiveClass())) ? ' '.$this->getLiActiveClass() : '').'"') : '').'><a href="'.self::$pageURL.(!empty($this->buildQueryString($link)) ? '?'.$this->buildQueryString($link) : '').'" title="Page '.$page.'"'.(!empty($this->getAClass()) || ($current === true && !empty($this->getAActiveClass())) ? ' class="'.trim($this->getAClass().(($current === true && !empty($this->getAActiveClass())) ? ' '.$this->getAActiveClass() : '')).'"' : '').'>'.$page.'</a></li>';
     }
     
@@ -155,7 +168,8 @@ class Pagination {
      * @param mixed $page If the page variable is set to a number will add the page number to the query string else will not add any additional items
      * @return string The complete string will be returned to add to the link item
      */
-    protected function buildQueryString($page) {
+    protected function buildQueryString($page)
+    {
         $pageInfo = is_numeric($page) ? ['page' => $page] : [];
         return http_build_query(array_filter(array_merge($pageInfo, $this->queryString)), '', '&amp;');
     }
@@ -167,16 +181,19 @@ class Pagination {
      * @param int $numpages The number of pagination buttons to display
      * return void Nothing is returned
      */
-    protected function getPage($records, $maxshown, $numpages) {
+    protected function getPage($records, $maxshown, $numpages)
+    {
         $show = floor($numpages / 2);
         if (self::$lastpage > $numpages) {
             self::$page = (self::$current > $show ? (self::$current - $show) : 1);
             if (self::$current < (self::$lastpage - $show)) {
                 self::$lastpage = ((self::$current <= $show) ? (self::$current + ($numpages - self::$current)) : (self::$current + $show));
+            } else {
+                self::$page = self::$current - ($numpages - ((ceil(intval($records) / ($maxshown >= 1 ? intval($maxshown) : 1)) - self::$current)) - 1);
             }
-            else { self::$page = self::$current - ($numpages - ((ceil(intval($records) / ($maxshown >= 1 ? intval($maxshown) : 1)) - self::$current)) - 1); }
+        } else {
+            self::$page = 1;
         }
-        else { self::$page = 1; }
     }
     
     /**
@@ -184,10 +201,13 @@ class Pagination {
      * @param boolean $arrows If you want to display previous arrows set to true else set to false
      * @return string Any previous link arrows will be returned as a string
      */
-    protected function preLinks($arrows = true) {
+    protected function preLinks($arrows = true)
+    {
         $paging = '';
         if (self::$current != 1 && $arrows) {
-            if (self::$current != 2) { $paging .= $this->buildLink('', '&laquo;'); }
+            if (self::$current != 2) {
+                $paging .= $this->buildLink('', '&laquo;');
+            }
             $paging .= $this->buildLink((self::$current - 1), '&lt;');
         }
         return $paging;
@@ -198,11 +218,14 @@ class Pagination {
      * @param boolean $arrows If you want to display next arrows set to true else set to false
      * @return string Any next link arrows will be returned as a string
      */
-    protected function postLinks($arrows = true) {
+    protected function postLinks($arrows = true)
+    {
         $paging = '';
         if (self::$current != self::$totalPages && $arrows) {
             $paging .= $this->buildLink((self::$current + 1), '&gt;');
-            if (self::$current != (self::$totalPages - 1)) { $paging .= $this->buildLink(self::$totalPages, '&raquo;'); }
+            if (self::$current != (self::$totalPages - 1)) {
+                $paging .= $this->buildLink(self::$totalPages, '&raquo;');
+            }
         }
         return $paging;
     }
