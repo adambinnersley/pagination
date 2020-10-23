@@ -26,8 +26,15 @@ class PaginationTest extends TestCase
      * @covers Pager\Pagination::buildQueryString
      * @covers Pager\Pagination::getLiActiveClass
      * @covers Pager\Pagination::getPaginationClass
+     * @covers Pager\Pagination::getAActiveClass
+     * @covers Pager\Pagination::getAClass
+     * @covers Pager\Pagination::getLiClass
      * @covers Pager\Pagination::postLinks
      * @covers Pager\Pagination::preLinks
+     * @covers Pager\Pagination::setAActiveClass
+     * @covers Pager\Pagination::setAClass
+     * @covers Pager\Pagination::setLiClass
+     * @covers Pager\Pagination::setPaginationClass
      */
     public function testCreatePager()
     {
@@ -37,11 +44,11 @@ class PaginationTest extends TestCase
         $this->assertStringContainsString('<li class="active"><a href="/test-page?page=1" title="Page 1">1</a></li>', $pager);
         $this->assertEquals('<ul class="pagination"><li class="active"><a href="/test-page?page=1" title="Page 1">1</a></li><li><a href="/test-page?page=2" title="Page 2">2</a></li><li><a href="/test-page?page=3" title="Page 3">3</a></li><li><a href="/test-page?page=2" title="Page &gt;">&gt;</a></li><li><a href="/test-page?page=3" title="Page &raquo;">&raquo;</a></li></ul>', $pager);
         
-        $alternateCurrent = $this->pagination->setAClass('')->setLiClass('')->setPaginationClass('pagination')->paging(106, '/test-page', 3);
+        $alternateCurrent = $this->pagination->setAClass('')->setLiClass('')->setAActiveClass('newactive')->setPaginationClass('pagination')->paging(106, '/test-page', 3);
         $this->assertStringStartsWith("<ul", $alternateCurrent);
         $this->assertStringEndsWith("ul>", $alternateCurrent);
-        $this->assertStringContainsString('<li class="active"><a href="/test-page?page=3" title="Page 3">3</a></li>', $alternateCurrent);
-        $this->assertEquals('<ul class="pagination"><li><a href="/test-page" title="Page &laquo;">&laquo;</a></li><li><a href="/test-page?page=2" title="Page &lt;">&lt;</a></li><li><a href="/test-page?page=1" title="Page 1">1</a></li><li><a href="/test-page?page=2" title="Page 2">2</a></li><li class="active"><a href="/test-page?page=3" title="Page 3">3</a></li></ul>', $alternateCurrent);
+        $this->assertStringContainsString('<li class="active"><a href="/test-page?page=3" title="Page 3" class="newactive">3</a></li>', $alternateCurrent);
+        $this->assertEquals('<ul class="pagination"><li><a href="/test-page" title="Page &laquo;">&laquo;</a></li><li><a href="/test-page?page=2" title="Page &lt;">&lt;</a></li><li><a href="/test-page?page=1" title="Page 1">1</a></li><li><a href="/test-page?page=2" title="Page 2">2</a></li><li class="active"><a href="/test-page?page=3" title="Page 3" class="newactive">3</a></li></ul>', $alternateCurrent);
         
         $maxLinks = $this->pagination->paging(2506, '/test-page', 0, 50, 11, true);
         $this->assertStringContainsString('Page 11', $maxLinks);
@@ -77,6 +84,9 @@ class PaginationTest extends TestCase
      * @covers Pager\Pagination::buildQueryString
      * @covers Pager\Pagination::getLiActiveClass
      * @covers Pager\Pagination::getPaginationClass
+     * @covers Pager\Pagination::getAActiveClass
+     * @covers Pager\Pagination::getAClass
+     * @covers Pager\Pagination::getLiClass
      * @covers Pager\Pagination::postLinks
      * @covers Pager\Pagination::preLinks
      */
@@ -98,6 +108,9 @@ class PaginationTest extends TestCase
      * @covers Pager\Pagination::buildQueryString
      * @covers Pager\Pagination::getLiActiveClass
      * @covers Pager\Pagination::getPaginationClass
+     * @covers Pager\Pagination::getAActiveClass
+     * @covers Pager\Pagination::getAClass
+     * @covers Pager\Pagination::getLiClass
      * @covers Pager\Pagination::postLinks
      * @covers Pager\Pagination::preLinks
      */
